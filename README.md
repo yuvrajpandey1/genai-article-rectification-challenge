@@ -27,14 +27,23 @@ The source article used to generate each article is available in the `source_art
 
 ✅ **Why it's correct:** Only the error was fixed ("63 million" → "165 million"), with no other modifications to the already-correct content.
 
-## LLM API Access
+## LLM API Access & Budget Constraints
 
-We will provide you with an LLM API key to develop your rectification system. The API key comes with a budget of approximately **5 million tokens** for:
-- Developing and testing your rectification system
-- Evaluating your approach on subsets of articles
-- Iterating on your solution
+We will provide you with an LLM API key to develop and deploy your rectification system.
 
-Once your system is ready, you can request additional token budget to rectify all 104 articles for final submission.
+**The Budget**: You have a strict hard limit of $3.00 USD.
+
+Based on current model pricing, this equates to approximately **10 million tokens**. This budget is sufficient, but finite. You must manage this resource effectively to cover the entire lifecycle of the project:
+
+- Development & Iteration: Testing your prompts and logic on small subsets.
+- Evaluation: Running your internal validation steps.
+- Final Production Run: Generating the final rectified versions for all 104 articles.
+
+### Monitoring Your Spend
+
+You are responsible for tracking your usage. We have provided a `budget_checker.py` module to help you view your remaining balance in real-time.
+
+Tip: We recommend calculating the average cost per article during your testing phase to ensure you reserve enough budget (approx. $1.00 - $1.50) for the final batch processing of all articles.
 
 ## Getting Started
 
@@ -52,13 +61,19 @@ Once your system is ready, you can request additional token budget to rectify al
 ### Running the Demo
 
 ```bash
+# Check remaining budget
+python budget_checker.py
+
+# Check budget with usage guide
+python budget_checker.py --guide
+
 # Test on first 16 articles
 python rectifier.py test
 
 # Test on custom count
 python rectifier.py test --count 5
 
-# Process all 100 articles
+# Process all 104 articles
 python rectifier.py rectify-all
 ```
 
@@ -104,7 +119,7 @@ You have complete flexibility to design your system:
 - **Design your evaluation metric first**—use it to iteratively improve your system
 - **Start small** (5-10 articles), validate, then scale up
 - **Use the 10 reference examples** in `rectified_articles/` to validate your approach
-- **Optimize token usage**—you have a limited budget (~5M tokens for development)
+- **Optimize token usage**—you have a limited budget (~10M tokens for development)
 - **Document your reasoning** for key design decisions
 
 
